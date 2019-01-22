@@ -1,0 +1,59 @@
+﻿@using WebCommercial.ViewModels;
+
+@model WebCommercial.Controllers.DetailCdeViewModel
+
+@{
+    ViewBag.Title = "Liste des clients";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (Model != null)
+{
+    <div class="container">
+        <div class="col-md-8 col-sm-8">
+            <div class="blanc">
+                <h1>Détail de la commandes n°@Model.CommandeVM.NoCommande </h1>
+            </div>
+            <div>
+                <p>Commande n°@Model.CommandeVM.NoCommande</p>
+                <p>Passée le : @Model.CommandeVM.Date</p>
+                <p>Montant total: @Model.PrixTotal</p>
+            </div>
+            <table class="table table-bordered table-striped table-responsive">
+                <thead>
+                    <tr>
+                        <th>N° article</th>
+                        <th>Libellé article</th>
+                        <th>Prix unitaire</th>
+                        <th>Quantitée</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                @foreach (DetailArticleCommandeViewModel detailArticle in Model.DetailArticle)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => detailArticle.NoArticle)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => detailArticle.NomArticle)
+                        </td>
+                        <td style="text-align:center;">
+                            @Html.DisplayFor(modelItem => detailArticle.PrixUnitaire)
+                        </td>
+                        <td style="text-align:center;">
+                            @Html.DisplayFor(modelItem => detailArticle.QteCdee)
+                        </td>
+                        <td style="text-align:center;">
+                            @Html.DisplayFor(modelItem => detailArticle.PrixTotalArticle)
+                        </td>
+                    </tr>
+                }
+            </table>
+            <div class="form-group">
+                <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
+                    @Html.ActionLink("Retour", "Index","Commande", new { @class = "btn btn-default btnprimary" })
+                </div>
+            </div>
+        </div>
+    </div>
+}

@@ -39,7 +39,9 @@ namespace WebCommercial.Models.Metiers
         /// Initialisation
         /// </summary>
         public Clientel()
-        { }
+        {
+            NoClient = "0";
+        }
         #endregion
 
         public override string ToString()

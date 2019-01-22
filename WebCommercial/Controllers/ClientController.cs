@@ -50,11 +50,28 @@ namespace WebCommercial.Controllers
         }
 
         [HttpPost]
-        public string Save(ClientelViewModel clientVM)
+        public ActionResult Save(ClientelViewModel clientVM)
         {
-            return clientVM.Nom + " "
-                + clientVM.Prenom + " "
-                + clientVM.Societe;
+            try
+            {
+                new ClientelDAO().Update(new Clientel(
+                clientVM.Id.ToString(),
+                clientVM.Societe,
+                clientVM.Nom,
+                clientVM.Prenom,
+                clientVM.Adresse,
+                clientVM.Ville,
+                clientVM.CodePostal
+                ));
+                //return View("~/Views/Client/Index.cshtml");
+                return RedirectToAction("Index");
+            }
+            catch (MonException exception)
+            {
+                return View("~/Views/Shared/Error.cshtml");
+            }
+            
+
 
         }
 

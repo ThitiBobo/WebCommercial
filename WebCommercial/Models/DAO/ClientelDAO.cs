@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using WebApplication1.Models.Persistance;
+using WebCommercial.Models.Erreurs;
 using WebCommercial.Models.Exceptions;
 using WebCommercial.Models.Metiers;
 
@@ -45,7 +46,7 @@ namespace WebCommercial.Models.DAO
 
         public void Delete(int Id)
         {
-            throw new System.NotImplementedException();
+            throw new ProhibitedFunctionException();
         }
 
         public Clientel GetSingleById(int id)
@@ -85,7 +86,22 @@ namespace WebCommercial.Models.DAO
 
         public void Update(Clientel obj)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                string sql = "UPDATE clientel SET "
+                    + "nom_cl = '" + obj.NomCl + "', "
+                    + "societe = '" + obj.Societe + "', "
+                    + "prenom_cl = '" + obj.PrenomCl + "', "
+                    + "adresse_cl = '" + obj.AdresseCl + "', "
+                    + "ville_cl = '" + obj.VilleCl + "', "
+                    + "code_post_cl = '" + obj.CodePostCl + "' "
+                    + "WHERE NO_CLIENT = " + obj.NoClient + ";";
+                DBInterface.Insertion_Donnees(sql);            
+            }
+            catch (MonException exception)
+            {
+                throw exception;
+            }
         }
     }
 }

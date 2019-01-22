@@ -1,0 +1,68 @@
+﻿@model IEnumerable<WebCommercial.Controllers.CommandeViewModel>
+
+@{
+    ViewBag.Title = "Liste des commandes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (Model != null)
+{
+    <div class="container">
+        <div class="col-md-8 col-sm-8">
+            <div class="blanc">
+                <h1>Liste des commandes </h1>
+            </div>
+            <table class="table table-bordered table-striped table-responsive">
+                <thead>
+                    <tr>
+                        <th>N° commande</th>
+                        <th>Nom client</th>
+                        <th>Nom Vendeur</th>
+                        <th>Date</th>
+                        <th>Facturée</th>
+                        <th style="width:80px">Détails</th>
+                        <th style="width:80px">Modifier</th>
+                    </tr>
+                </thead>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NoCommande)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Clientel.Nom)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Vendeur.NomVend)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Facture)
+                    </td>
+                    <td style="text-align:center;">
+                        <span>
+                            @Html.ActionLink("Détails", "Details", "Commande", new { id = item.NoCommande }, new { @class
+                            = "btn btn-default btn-primary"})
+                        </span>
+                    </td>
+                    <td style="text-align:center;">
+                        <span>
+                            @Html.ActionLink(" ", "Modifier", "Commande", new { id = item.NoCommande }, new { @class
+                           = "btn btn-default btn-primary glyphicon glyphicon glyphicon-pencil"
+                       })
+                        </span>
+                    </td>
+                </tr>
+                }
+            </table>
+            <div class="form-group">
+                <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
+                    @Html.ActionLink("Ajouter des commande", "Create", "Commande", new { @class = "btn btn-default btnprimary"
+                   })
+                </div>
+            </div>
+        </div>
+    </div>
+}

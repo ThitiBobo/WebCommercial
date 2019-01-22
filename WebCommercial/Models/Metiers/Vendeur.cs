@@ -13,7 +13,7 @@ namespace WebCommercial.Models.Metiers
         public Vendeur VendeurChefEq { get; set; }
         public string NomVend { get; set; }
         public string PrenomVend { get; set; }
-        public DateTime DateEmbau { get; set; }
+        public string DateEmbau { get; set; }
         public string VilleVend { get; set; }
         public float SalaireVend { get; set; }
         public float Commission { get; set; }
@@ -22,7 +22,7 @@ namespace WebCommercial.Models.Metiers
         //Définitions des constructeurs
         #region Constructors
         public Vendeur(string noVendeur, Vendeur vendeurChefEq, string nomVend,
-            string prenomVend, DateTime dateEmbau, string villeVend,
+            string prenomVend, string dateEmbau, string villeVend,
             float salaireVend, float commission)
         {
             NoVendeur = noVendeur;

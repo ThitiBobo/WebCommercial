@@ -63,13 +63,14 @@ namespace WebApplication1.Models.Persistance
         public static void Insertion_Donnees(String requete)
         {
             MySqlConnection cnx = null;
+            MySqlTransaction OleTrans = null;
+            MySqlCommand OleCmd = null;
             try
             {
                 // On ouvre une transaction
                 cnx = Connexion.getInstance().getConnexion();
-                MySqlTransaction OleTrans =
-               cnx.BeginTransaction();
-                MySqlCommand OleCmd = new MySqlCommand();
+                OleTrans = cnx.BeginTransaction();
+                OleCmd = new MySqlCommand();
                 OleCmd = cnx.CreateCommand();
                 OleCmd.Transaction = OleTrans;
                 OleCmd.CommandText = requete;
@@ -80,6 +81,38 @@ namespace WebApplication1.Models.Persistance
             {
                 throw new MonException(uneException.Message,"Insertion", "SQL");
             }
+            finally
+            {
+                // on libére la ressource
+                cnx.Dispose();
+                OleCmd.Dispose();
+                OleTrans.Dispose();
+            }
+        }
+
+        public static int LastId(string table, string champId)
+        {
+            Serreurs erreur = new Serreurs("Erreur sur lecture de la base de données.", "DBInterface.LastId()");
+            string sql = "SELECT " + champId + " FROM " 
+                + table + " ORDER BY " + champId + " DESC LIMIT 1";
+            try
+            {
+                DataTable dataTable = Lecture(sql, erreur);
+                // reourne le dernier entier + 1
+                int lastId = int.Parse(dataTable.Rows[0][0].ToString()) + 1;
+                dataTable.Dispose();
+                return lastId;
+                
+            }
+            catch (MonException e)
+            {
+                throw new MonException(erreur.MessageUtilisateur(), erreur.MessageApplication(), e.Message);
+            }
+            catch (MySqlException e)
+            {
+                throw new MonException(erreur.MessageUtilisateur(), erreur.MessageApplication(), e.Message);
+            }
+
         }
     }
 }

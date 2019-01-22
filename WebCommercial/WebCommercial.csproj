@@ -145,6 +145,11 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ClientController.cs" />
+    <Compile Include="Controllers\CommandeController.cs" />
+    <Compile Include="ViewModels\ArticleViewModel.cs" />
+    <Compile Include="ViewModels\DetailArticleCommandeViewModel.cs" />
+    <Compile Include="ViewModels\DetailCdeViewModel.cs" />
+    <Compile Include="ViewModels\CommandeViewModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -156,6 +161,7 @@
     <Compile Include="Models\DAO\IDAO.cs" />
     <Compile Include="Models\DAO\VendeurDAO.cs" />
     <Compile Include="Models\Erreurs\MonExcepion.cs" />
+    <Compile Include="Models\Erreurs\ProhibitedFunctionException.cs" />
     <Compile Include="Models\Erreurs\Serreurs.cs" />
     <Compile Include="Models\Metiers\Article.cs" />
     <Compile Include="Models\Metiers\Clientel.cs" />
@@ -211,6 +217,9 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Client\Index.cshtml" />
     <Content Include="Views\Client\Modifier.cshtml" />
+    <Content Include="Views\Commande\Index.cshtml" />
+    <Content Include="Views\Commande\Details.cshtml" />
+    <Content Include="Views\Commande\Modifier.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
